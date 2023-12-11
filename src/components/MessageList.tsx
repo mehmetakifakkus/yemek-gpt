@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Message } from "ai/react";
 import React from "react";
 
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const MessageList = ({ messages }: Props) => {
+  const [animationParent] = useAutoAnimate();
+
   if (!messages) {
     return (
       <div className="flex gap-2 px-4">
@@ -20,7 +23,7 @@ const MessageList = ({ messages }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4">
+    <div ref={animationParent} className="flex flex-col gap-4 px-6">
       {messages.map((message) => (
         <div
           key={message.id}
@@ -31,7 +34,7 @@ const MessageList = ({ messages }: Props) => {
         >
           <div
             className={cn(
-              "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10",
+              "rounded-lg px-3 text-base py-2 shadow-md ring-1 ring-gray-900/10",
               {
                 "bg-neutral-600 text-white": message.role === "user",
                 "bg-neutral-200 text-neutral-900": message.role === "assistant",
