@@ -1,8 +1,7 @@
 import { Configuration, OpenAIApi } from "openai-edge";
 import { Message, OpenAIStream, StreamingTextResponse } from "ai";
-import { getContext } from "@/lib/context";
-import getChatById from "@/app/actions/getChatById";
 import { NextResponse } from "next/server";
+import axios from "axios";
 
 // Comment out the following line since prisma does not work in edge runtime
 // export const runtime = 'edge';
@@ -16,21 +15,19 @@ const openai = new OpenAIApi(configuration);
 export async function POST(req: Request) {
   try {
     const { messages, chatId } = await req.json();
-    const _chat = await getChatById({ chatId });
-    console.log('_chat', _chat);
-    if (!_chat) {
-      return NextResponse.json({ error: "chat not found" }, { status: 404 });
-    }
-
     const lastMessage = messages[messages.length - 1];
     console.log('lastMessage', lastMessage)
 
-    const context = await getContext(lastMessage.content, _chat?.fileKey);
-    console.log('context', context);
+    // if (!context || context === '' || context.length < 10) {
+    //   return NextResponse.json({ error: "context not found" }, { status: 404 });
+    // }
 
-    if (!context || context === '' || context.length < 10) {
-      return NextResponse.json({ error: "context not found" }, { status: 404 });
-    }
+    const result = await axios.post('https://vectordbserver-468abb35481d.herokuapp.com/', {
+      message: lastMessage.content,
+    })
+
+    let context = result.data[0].page_content;
+    // console.log('context', context)
 
     const prompt = {
       role: "system",
