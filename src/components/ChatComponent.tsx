@@ -29,21 +29,23 @@ const ChatComponent = ({ chatId }: Props) => {
 
   return (
     <div id="chat" className="relative max-h-screen overflow-scroll">
-      <div className="sticky top-0 inset-x-0 p-3 bg-white h-fit">
-        <h3 className="text-xl font-bold">Chat with document selected</h3>
+      <div className="sticky top-0 inset-x-0 p-6 bg-white h-fit z-10">
+        <h3 className="text-3xl font-semibold mb-6">
+          Elinizdeki malzemeleri ya da ne yemek istediğinizi yazın!
+        </h3>
       </div>
 
       <MessageList messages={messages} />
 
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 px-2 py-4 bg-white"
+        className="sticky bottom-0 px-6 py-4 bg-white"
       >
         <Input
           value={input}
           onChange={handleInputChange}
-          placeholder="Ask any question..."
-          className="w-full border-slate-600"
+          placeholder="Malzemeler ya da yemek ismi..."
+          className="w-full border-slate-600 text-lg p-4"
         />
         <div className="flex justify-end">
           <Button className=" text-lg bg-slate-700 mt-4">
