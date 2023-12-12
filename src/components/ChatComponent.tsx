@@ -53,8 +53,8 @@ const ChatComponent = ({ chatId }: Props) => {
           className="w-full border-slate-600 text-lg p-4"
         />
         <div className="flex justify-end">
-          <Button className=" text-lg bg-slate-700 mt-4">
-            Send <RiSendPlane2Line className="ml-2" size={20} />
+          <Button className=" text-lg bg-red-800 mt-4">
+            Gönder <RiSendPlane2Line className="ml-2" size={20} />
           </Button>
         </div>
       </form>
