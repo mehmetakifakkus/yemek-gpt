@@ -26,21 +26,15 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
             loop
             muted
             playsInline
-            id="bgvid"
             className="w-full h-full object-cover"
-            style={{ filter: "opacity(.5);" }}
+            style={{ filter: "opacity(.75);" }}
           >
             <source src="/chef.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="flex w-full max-h-screen overflow-scroll">
-          {/* chat sidebar */}
-          {/* <div className="flex-[2] max-w-xs ">
-          <ChatSideBar chats={chats} chatId={chatId} />
-        </div> */}
-
-          {/* chat component */}
-          <div className="flex-[6] border-l-4 border-l-slate-400 sm:px-[120px] lg:px-[240px]">
+          {/* chat component px-[0px] sm:px-[40px] lg:px-[120px] xl:w-[960px] */}
+          <div className="flex w-[92vw] sm:w-[80vw] justify-center mx-auto">
             <ChatComponent chatId={chatId} />
           </div>
         </div>

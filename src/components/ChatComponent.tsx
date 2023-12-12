@@ -30,11 +30,12 @@ const ChatComponent = ({ chatId }: Props) => {
   }, [messages]);
 
   return (
-    <div id="chat" className="relative max-h-screen overflow-scroll">
+    <div id="chat" className="relative max-h-screen overflow-y-scroll">
       <div className="sticky top-0 inset-x-0 p-6 h-fit bg-transparent z-20">
         <h3
-          className="text-3xl font-bold mt-12 mb-6 text-red-800 z-50 drop-shadow-lg"
-          style={{ filter: "drop-shadow(5px 8px 6px black);" }}
+          className="text-2xl sm:text-3xl font-bold mt-12 mb-2 sm:mb-6 text-red-800 z-50 drop-shadow-lg 
+          w-[calc(100%-30px)]"
+          style={{ filter: "drop-shadow(6px 4px 4px white)" }}
         >
           Elinizdeki malzemeleri ya da ne yemek istediğinizi yazın!
         </h3>
@@ -50,7 +51,7 @@ const ChatComponent = ({ chatId }: Props) => {
           value={input}
           onChange={handleInputChange}
           placeholder="Malzemeler ya da yemek ismi..."
-          className="w-full border-slate-600 text-lg p-4"
+          className="border-slate-600 text-lg p-4 w-full"
         />
         <div className="flex justify-end">
           <Button className=" text-lg bg-red-800 mt-4">

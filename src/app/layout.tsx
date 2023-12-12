@@ -9,8 +9,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Chat-GPT app",
-  description: "You can chat with a GPT-3 powered chatbot about Turkish food.",
+  title: "Yemek-GPT app",
+  description:
+    "You can chat with a GPT-3.5-turbo powered chatbot about Turkish food.",
 };
 
 export default function RootLayout({
@@ -29,8 +30,8 @@ export default function RootLayout({
             )}
           >
             {children}
+            <Toaster />
           </body>
-          <Toaster />
         </html>
       </Providers>
     </ClerkProvider>
