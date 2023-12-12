@@ -14,38 +14,47 @@ const openai = new OpenAIApi(configuration);
 
 export async function POST(req: Request) {
   try {
-    const { messages, chatId } = await req.json();
+    const { messages, selectedRecipe } = await req.json();
+    // const [similarRecipes, setSimilarRecipes] = useState([]);
+    // const [selectedRecipe, setSelectedRecipe] = useState(null);
+    console.log('messages', messages)
     const lastMessage = messages[messages.length - 1];
     console.log('lastMessage', lastMessage)
-
-    // if (!context || context === '' || context.length < 10) {
-    //   return NextResponse.json({ error: "context not found" }, { status: 404 });
-    // }
 
     const result = await axios.post('https://vectordbserver-468abb35481d.herokuapp.com/', {
       message: lastMessage.content,
     })
 
-    let context = result.data[0].page_content;
-    // console.log('context', context)
+    if (!selectedRecipe) {
+      return NextResponse.json({ status: 'recipe not selected yet', recipes: result.data }, { status: 200 });
+    }
+
+    let context = result.data[0];
+    if (!context || context === '' || context.length < 10) {
+      return NextResponse.json({ error: "context not found" }, { status: 404 });
+    }
+
+    // console.log('context', context.page_content)
 
     const prompt = {
       role: "system",
-      content: `AI assistant is a brand new, powerful, human-like artificial intelligence.
+      content: `AI assistant is a brand new, powerful, human-like artificial intelligence for recipes.
+      Don't justify your answers. Don't give information not mentioned in the CONTEXT BLOCK.
       The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
-      AI is a well-behaved and well-mannered individual.
-      AI is always friendly, kind, and inspiring, and he is eager to provide vivid and thoughtful responses to the user.
-      AI has the sum of all knowledge in their brain, and is able to accurately answer nearly any question about any topic in conversation.
-      AI assistant is a big fan of Pinecone and Vercel.
+      This recipe assistant will give the answer from the recipe context.
+
       START CONTEXT BLOCK
-      ${context}
+      "${context.page_content}"
       END OF CONTEXT BLOCK
+      
       AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation.
-      If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
+      If the context does not provide the answer to question, the AI assistant will say, "Özür dilerim bu sorunuza cevap veremiyorum".
       AI assistant will not apologize for previous responses, but instead will indicated new information was gained.
       AI assistant will not invent anything that is not drawn directly from the context.
       `,
     };
+
+    console.log('prompt', prompt.content)
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
