@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { useChat } from "ai/react";
 import { RiSendPlane2Line } from "react-icons/ri";
@@ -10,6 +10,8 @@ import MessageList from "./MessageList";
 type Props = { chatId: string };
 
 const ChatComponent = ({ chatId }: Props) => {
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "/api/chat",
     body: {

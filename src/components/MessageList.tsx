@@ -6,6 +6,7 @@ import { Message } from "ai/react";
 import React from "react";
 
 import { AiOutlineFileExclamation } from "react-icons/ai";
+import RecipeList from "./RecipeList";
 
 type Props = {
   messages: Message[];
@@ -32,17 +33,25 @@ const MessageList = ({ messages }: Props) => {
             "justify-start pr-10": message.role === "assistant",
           })}
         >
-          <div
-            className={cn(
-              "rounded-lg px-3 text-base py-2 shadow-md ring-1 ring-gray-900/10",
-              {
-                "bg-neutral-600 text-white": message.role === "user",
-                "bg-neutral-200 text-neutral-900": message.role === "assistant",
-              }
-            )}
-          >
-            <p>{message.content}</p>
-          </div>
+          {message.role === "assistant" &&
+          JSON.parse(message.content).status === "recipe not selected yet" ? (
+            <RecipeList
+              recipeList={JSON.parse(message.content).recipes as any[]}
+            />
+          ) : (
+            <div
+              className={cn(
+                "rounded-lg px-3 text-base py-2 shadow-md ring-1 ring-gray-900/10",
+                {
+                  "bg-neutral-600 text-white": message.role === "user",
+                  "bg-neutral-200 text-neutral-900":
+                    message.role === "assistant",
+                }
+              )}
+            >
+              <p>{message.content}</p>
+            </div>
+          )}
         </div>
       ))}
     </div>
