@@ -1,4 +1,3 @@
-import getChats from "@/app/actions/getChats";
 import ChatComponent from "@/components/ChatComponent";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
