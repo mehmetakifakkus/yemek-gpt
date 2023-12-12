@@ -24,7 +24,7 @@ const MessageList = ({ messages }: Props) => {
   }
 
   return (
-    <div ref={animationParent} className="flex flex-col gap-4 px-6">
+    <div ref={animationParent} className="flex flex-col gap-4 px-6 ">
       {messages.map((message) => (
         <div
           key={message.id}
@@ -41,9 +41,9 @@ const MessageList = ({ messages }: Props) => {
           ) : (
             <div
               className={cn(
-                "rounded-lg px-3 text-base py-2 shadow-md ring-1 ring-gray-900/10",
+                "rounded-lg px-3 text-base font-semibold py-2 shadow-md ring-1 ring-gray-900/10",
                 {
-                  "bg-neutral-600 text-white": message.role === "user",
+                  "bg-red-900 text-white": message.role === "user",
                   "bg-neutral-200 text-neutral-900":
                     message.role === "assistant",
                 }

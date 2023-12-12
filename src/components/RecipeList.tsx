@@ -24,12 +24,12 @@ const RecipeList = ({ recipeList }: Props) => {
   });
 
   return (
-    <div className="flex">
+    <div className="flex my-2 mb-6">
       {recipes.map((recipe) => (
         <div className="flex flex-col gap-2 px-2 ">
           <div
             key={recipe.title}
-            className="flex whitespace-pre-wrap bg-neutral-100 hover:bg-neutral-200"
+            className="flex whitespace-pre-wrap bg-yellow-100 hover:bg-yellow-200"
           >
             <div className="rounded-lg px-3 text-sm py-2 shadow-md ring-1 ring-gray-900/10 w-60">
               <p className="font-bold mb-2 min-h-[2.4rem]">{recipe.title}</p>
