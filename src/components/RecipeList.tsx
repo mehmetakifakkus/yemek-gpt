@@ -44,13 +44,13 @@ const RecipeList = ({ recipeList }: Props) => {
             <p className="italic mb-4 text-xs">
               {recipe.ingredients?.substring(0, 150)}
             </p>
-            <a
+            {/* <a
               href={recipe.metadata.link}
               target="_blank"
               className="text-xs text-blue-400"
             >
               Tarife git →
-            </a>
+            </a> */}
             {/* <p>{recipe.steps?.substring(0, 200)}</p> */}
           </div>
         </div>
