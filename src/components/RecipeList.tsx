@@ -40,10 +40,17 @@ const RecipeList = ({ recipeList }: Props) => {
         >
           <div className="rounded-lg px-3 text-sm py-2 shadow-md ring-1 ring-gray-900/10 w-60 bg-yellow-100 hover:bg-yellow-200">
             <img className="rounded-md mb-2" src={recipe.metadata.image} />
-            <p className="font-bold mb-2 min-h-[2.4rem]">{recipe.title}</p>
-            <p className="italic mb-4">
-              {recipe.ingredients?.substring(0, 100)}
+            <p className="font-bold mb-2 min-h-[2.2rem]">{recipe.title}</p>
+            <p className="italic mb-4 text-xs">
+              {recipe.ingredients?.substring(0, 150)}
             </p>
+            <a
+              href={recipe.metadata.link}
+              target="_blank"
+              className="text-xs text-blue-400"
+            >
+              Tarife git →
+            </a>
             {/* <p>{recipe.steps?.substring(0, 200)}</p> */}
           </div>
         </div>
